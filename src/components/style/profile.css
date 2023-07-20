@@ -1,4 +1,4 @@
-.register-container {
+.profile-container {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -7,24 +7,24 @@
     border-radius: 4px;
   }
   
-  .form-group {
+  .profile-item {
     margin-bottom: 15px;
   }
   
-  .form-group label {
+  .profile-item label {
     display: block;
     font-weight: bold;
   }
   
-  .form-group input[type='text'],
-  .form-group input[type='password'] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .profile-item div {
+    margin-top: 5px;
   }
   
-  .submit-btn {
+  .profile-item img {
+    margin-top: 5px;
+  }
+  
+  .profile-item button {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
@@ -34,7 +34,7 @@
     font-size: 16px;
   }
   
-  .submit-btn:hover {
+  .profile-item button:hover {
     background-color: #45a049;
   }
   

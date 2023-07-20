@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -10,7 +12,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -75,9 +77,46 @@ function Login() {
 // ---------------------- ไม่ต้องเขียน ----------------------
 
     const theme = createTheme();
-
     return (
         <div>
+            <div>
+              <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <Link className="navbar-brand" to="/">My App</Link>
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/login">Login</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/question">Question</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/profile">Profile</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/register">Register</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/crud">Crud</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/compiler">Compiler</Link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
             <ThemeProvider theme={theme}>
               <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -130,9 +169,7 @@ function Login() {
                     </Button>
                     <Grid container>
                       <Grid item>
-                        <Link href="/register" variant="body2">
-                          {"Don't have an account? Sign Up"}
-                        </Link>
+                      <Link className="nav-link" to="/register">Register</Link>
                       </Grid>
                     </Grid>
                   </Box>
