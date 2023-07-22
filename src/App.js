@@ -6,6 +6,7 @@ import Update from "./components/Update";
 import Question from "./components/Question";
 import Home from "./components/Home";
 import Compiler from "./components/Compiler";
+import Forum from "./components/Forum";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="crud" element={<Crud />} />
         <Route path='/update/:id' element={<Update />} />
         <Route path="compiler" element={<Compiler />}/>
+        <Route path="forum" element={<Forum />}/>
       </Routes>
     </div>
   );
