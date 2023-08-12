@@ -27,18 +27,6 @@ export default class Compiler extends Component {
     const token = localStorage.getItem('token');
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + token);
-    
-    this.socket=io("http://localhost:3001");
-    
-    // Listen for messages from the server
-    this.socket.on("message", (message) => {
-      console.log("Received message from server:", message);
-      // Do something with the message here, if needed.
-    });
-
-    // Send the username to the server
-    this.socket.emit("username", this.state.user.username);
-
     var requestOptions = {
       method: 'GET',
       headers: myHeaders,
@@ -64,6 +52,23 @@ export default class Compiler extends Component {
         }
       })
       .catch((error) => console.log('error', error));
+          
+    this.socket=io("http://localhost:3001", {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd"
+      }
+    });
+    
+    // Listen for messages from the server
+    this.socket.on("message", (message) => {
+      console.log("Received message from server:", message);
+      // Do something with the message here, if needed.
+    });
+
+    // Send the username to the server
+    this.socket.emit("username", this.state.user.username);
+
   }
 
   navigate(path) {
