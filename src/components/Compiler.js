@@ -50,6 +50,7 @@ export default class Compiler extends Component {
             window.location.href = '/';
           });
         }
+      this.socket.emit("username", result.user.username);
       })
       .catch((error) => console.log('error', error));
           
@@ -67,7 +68,6 @@ export default class Compiler extends Component {
     });
 
     // Send the username to the server
-    this.socket.emit("username", this.state.user.username);
 
   }
 
