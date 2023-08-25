@@ -50,6 +50,7 @@ export default class Compiler extends Component {
             window.location.href = '/';
           });
         }
+      // Send the username to the server
       this.socket.emit("username", result.user.username);
       })
       .catch((error) => console.log('error', error));
@@ -66,9 +67,6 @@ export default class Compiler extends Component {
       console.log("Received message from server:", message);
       // Do something with the message here, if needed.
     });
-
-    // Send the username to the server
-
   }
 
   navigate(path) {
@@ -153,6 +151,12 @@ export default class Compiler extends Component {
       const output = atob(jsonGetSolution.stdout);
       outputText.innerHTML = "";
       outputText.innerHTML += `Results :\n${output}\nExecution Time : ${jsonGetSolution.time} Secs\nMemory used : ${jsonGetSolution.memory} bytes`;
+      this.socket.emit('solutionData', {
+        user: this.state.user.username,
+        memory: jsonGetSolution.memory,
+        time: jsonGetSolution.time,
+        stdout: output
+    });
     } else if (jsonGetSolution.stderr) {
       const error = atob(jsonGetSolution.stderr);
       outputText.innerHTML = "";
