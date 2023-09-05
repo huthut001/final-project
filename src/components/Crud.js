@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import Navbar from '../layout/nav';
+import Footer from '../layout/footer';
 
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -73,6 +75,7 @@ function Crud() {
 
     return(
         <div>
+            <Navbar/>
             <div style={createUser}><a href="register">Create</a></div>
             <Table>
                 <TableHead>
@@ -107,6 +110,7 @@ function Crud() {
                     ))}
                 </TableBody>
             </Table>
+            <Footer></Footer>
 
         </div>
     )

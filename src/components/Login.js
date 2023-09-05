@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import Footer from '../layout/footer';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +21,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import Navbar from '../layout/nav';
+
 
 
 // ---------------------- ไม่ต้องเขียน ----------------------
@@ -79,103 +84,67 @@ function Login() {
     const theme = createTheme();
     return (
         <div>
-            <div>
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">My App</Link>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navbarNav"
-                  aria-controls="navbarNav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                  <ul className="navbar-nav">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/question">Question</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/profile">Profile</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/register">Register</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/crud">Crud</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/compiler">Compiler</Link>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-            </div>
-            <ThemeProvider theme={theme}>
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
-                  </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Sign in
-                  </Typography>
-                  <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="username"
-                      label="username"
-                      name="username"
-                      autoComplete="username"
-                      autoFocus
-                      value={inputs.username || ""} 
-                      onChange={handleChange}
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      value={inputs.password || ""} 
-                      onChange={handleChange}
-                    />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                    >
-                      Sign In
-                    </Button>
-                    <Grid container>
-                      <Grid item>
-                      <Link className="nav-link" to="/register">Register</Link>
-                      </Grid>
+          <Navbar/>
+          <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="username"
+                    name="username"
+                    autoComplete="username"
+                    autoFocus
+                    value={inputs.username || ""} 
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    value={inputs.password || ""} 
+                    onChange={handleChange}
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item>
+                    <Link className="nav-link" to="/register">Register</Link>
                     </Grid>
-                  </Box>
+                  </Grid>
                 </Box>
-              </Container>
-            </ThemeProvider>
+              </Box>
+            </Container>
+          </ThemeProvider>
+          <Footer/>
         </div>
     )
 }

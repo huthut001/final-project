@@ -6,6 +6,17 @@ import withReactContent from 'sweetalert2-react-content';
 import { Link } from "react-router-dom";
 import './style/question.css'; // Import the CSS file for styling
 
+import {
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBCheckbox,
+  MDBBtn,
+  MDBTextArea
+} from 'mdb-react-ui-kit';
+
+import Navbar from '../layout/nav';
+
 function Question() {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
@@ -74,133 +85,121 @@ function Question() {
   };
 
   return (
-    <div>
+    // <div>
+    //   <Navbar></Navbar>
+    //     <div className="question-container">
+    //         <form onSubmit={handleSubmit}>
+    //             <div className="form-group">
+    //             <label>Title Name:</label>
+    //             <input
+    //                 type="text"
+    //                 name="title"
+    //                 value={inputs.title || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             {/* <div className="form-group">
+    //             <label>Answer:</label>
+    //             <input
+    //                 type="text"
+    //                 name="answer"
+    //                 value={inputs.answer || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div> */}
+
+    //             <div className="form-group">
+    //             <label>Mode:</label>
+    //             <input
+    //                 type="text"
+    //                 name="mode"
+    //                 value={inputs.mode || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Testcase:</label>
+    //             <input
+    //                 type="text"
+    //                 name="output"
+    //                 value={inputs.output || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Detail:</label>
+    //             <input
+    //                 type="text"
+    //                 name="detail"
+    //                 value={inputs.detail || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Runtime:</label>
+    //             <input
+    //                 type="text"
+    //                 name="runtime"
+    //                 value={inputs.runtime || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Memory:</label>
+    //             <input
+    //                 type="text"
+    //                 name="memory"
+    //                 value={inputs.memory || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Cpu Usage:</label>
+    //             <input
+    //                 type="text"
+    //                 name="cpu"
+    //                 value={inputs.cpu || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <button type="submit" className="submit-btn">
+    //             Submit
+    //             </button>
+    //         </form>
+    //     </div>
+
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">My App</Link>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navbarNav"
-                  aria-controls="navbarNav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/login">Login</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/question">Question</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/profile">Profile</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/register">Register</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/crud">Crud</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/compiler">Compiler</Link>
-                    </li>
-                </ul>
-                </div>
-            </nav>
-        </div>
-        <div className="question-container">
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                <label>Title Name:</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={inputs.title || ''}
-                    onChange={handleChange}
-                />
-                </div>
+          <Navbar></Navbar>
+          <form className='container' style={{ padding:30 }}>
+          <MDBRow className='mb-4'>
+            <MDBCol>
+              <MDBInput id='form6Example1' label='Title' />
+            </MDBCol>
+            <MDBCol>
+              <MDBInput id='form6Example2' label='Mode' />
+            </MDBCol>
+          </MDBRow>
 
-                {/* <div className="form-group">
-                <label>Answer:</label>
-                <input
-                    type="text"
-                    name="answer"
-                    value={inputs.answer || ''}
-                    onChange={handleChange}
-                />
-                </div> */}
+          <MDBTextArea wrapperClass='mb-4' label='Detail' id='textAreaExample' rows={6} />
+          <MDBInput wrapperClass='mb-4' id='form6Example4' label='runtime' />
+          <MDBInput wrapperClass='mb-4' type='email' id='form6Example5' label='Memory usage' />
+          <MDBInput wrapperClass='mb-4' type='tel' id='form6Example6' label='testcase' />
 
-                <div className="form-group">
-                <label>Mode:</label>
-                <input
-                    type="text"
-                    name="mode"
-                    value={inputs.mode || ''}
-                    onChange={handleChange}
-                />
-                </div>
+          <MDBBtn className='mb-4' type='submit' block>
+            Create
+          </MDBBtn>
+        </form>
 
-                <div className="form-group">
-                <label>Testcase:</label>
-                <input
-                    type="text"
-                    name="output"
-                    value={inputs.output || ''}
-                    onChange={handleChange}
-                />
-                </div>
-
-                <div className="form-group">
-                <label>Detail:</label>
-                <input
-                    type="text"
-                    name="detail"
-                    value={inputs.detail || ''}
-                    onChange={handleChange}
-                />
-                </div>
-
-                <div className="form-group">
-                <label>Runtime:</label>
-                <input
-                    type="text"
-                    name="runtime"
-                    value={inputs.runtime || ''}
-                    onChange={handleChange}
-                />
-                </div>
-
-                <div className="form-group">
-                <label>Memory:</label>
-                <input
-                    type="text"
-                    name="memory"
-                    value={inputs.memory || ''}
-                    onChange={handleChange}
-                />
-                </div>
-
-                <div className="form-group">
-                <label>Cpu Usage:</label>
-                <input
-                    type="text"
-                    name="cpu"
-                    value={inputs.cpu || ''}
-                    onChange={handleChange}
-                />
-                </div>
-
-                <button type="submit" className="submit-btn">
-                Submit
-                </button>
-            </form>
-        </div>
-    </div>
+      </div>
+      
+    // </div>
   );
 }
 
