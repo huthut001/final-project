@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
+const fetch = require('node-fetch');
 
 const io = require("socket.io")(http, {
   cors: {
@@ -14,7 +15,7 @@ const io = require("socket.io")(http, {
 // const allowedUsers = ["huthut", "user2", "user3"]; // Replace these with the actual allowed usernames
 const userMemory = {};
 const userOutputs = {};
-let submittedUsers = 0; // Keep track of the number of users who have submitted
+let submittedUsers = 0; // Keep track of the number of users who have submitte
 
 
 io.on("connection", (socket) => {
@@ -22,43 +23,46 @@ io.on("connection", (socket) => {
 
   // Listen for the "username" event from the client
   socket.on("username", (username) => {
-      // If the username is allowed, add it to the socket's data
+    // If the username is allowed, add it to the socket's data
       socket.username = username;
       console.log(socket.username);
 
       socket.on('solutionData', (data) => {
-        // Here you can access the received memory and time values
-        const memory = data.memory;
-        const time = data.time;
-        const user = data.user
-        const stdout = data.stdout
-        // Do whatever you want with the received data on the server side
-        console.log(`user name: ${user}` );
-        console.log(`Received memory: ${memory} bytes`);
-        console.log(`Received time: ${time} Swecs`);
-        console.log(`output: ${stdout}`);
-        console.log(`type data ${typeof stdout}`);
 
-        if (!(user in userMemory) || memory < userMemory[user]) {
-          userMemory[user] = memory;
-          userOutputs[user] = stdout;
-        }
+      // Here you can access the received memory and time values
 
-        submittedUsers++;
+      const memory = data.memory;
+      const time = data.time;
+      const user = data.user
+      const stdout = data.stdout
 
-        if (submittedUsers === io.engine.clientsCount) {
-          evaluateSubmissions();
-        }
-      });
+      // Do whatever you want with the received data on the server side
+
+      console.log(`user name: ${user}` );
+      console.log(`Received memory: ${memory} bytes`);
+      console.log(`Received time: ${time} Swecs`);
+      console.log(`output: ${stdout}`);
+      console.log(`type data ${typeof stdout}`);
+
+      if (!(user in userMemory) || memory < userMemory[user]) {
+        userMemory[user] = memory;
+        userOutputs[user] = stdout;
+      }
+
+      submittedUsers++;
+
+      if (submittedUsers === io.engine.clientsCount) {
+        evaluateSubmissions();
+      }
+    });
+
+    // Handle other socket events or messages from the client, if needed.
+
+    socket.on("disconnect", () => {
+      console.log("A user disconnected");
+    });
   });
-
-  // Handle other socket events or messages from the client, if needed.
-
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
-
+})
 // function announceWinner() {
 //   let leastMemoryUser = null;
 //   let leastMemoryValue = Infinity;
