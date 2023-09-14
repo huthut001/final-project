@@ -19,6 +19,7 @@ export default class Compiler extends Component {
       user:'hello',
       testCaseResults: {}, // Initialize test case results object,
       isLoaded: true,
+      question: {},
     };
     this.navigate = this.navigate.bind(this);
     this.socket = io();
@@ -27,7 +28,9 @@ export default class Compiler extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     var myHeaders = new Headers();
+
     myHeaders.append('Authorization', 'Bearer ' + token);
+
     var requestOptions = {
       method: 'GET',
       headers: myHeaders,
@@ -68,7 +71,13 @@ export default class Compiler extends Component {
       console.log("Received message from server:", message);
       // Do something with the message here, if needed.
     });
+
+    this.socket.on('newQuestion', (newQuestion) => {
+      this.setState({question: newQuestion})
+      console.log(newQuestion);
+    })
   }
+
 
   navigate(path) {
     this.props.history.push(path);
@@ -103,7 +112,6 @@ export default class Compiler extends Component {
     let outputText = document.getElementById("output");
     outputText.innerHTML = "";
     outputText.innerHTML += "Creating Submission ...\n";
-  
     const response = await fetch(
       "https://judge0-ce.p.rapidapi.com/submissions",
       {
@@ -172,7 +180,7 @@ export default class Compiler extends Component {
     let outputText = document.getElementById("output");
     outputText.innerHTML = "";
     outputText.innerHTML += "Creating Submission ...\n";
-    
+
     const response = await fetch(
       "https://judge0-ce.p.rapidapi.com/submissions",
       {
@@ -224,22 +232,17 @@ export default class Compiler extends Component {
       const output = atob(jsonGetSolution.stdout);
       outputText.innerHTML = "";
       outputText.innerHTML += `Results :\n${output}\nExecution Time : ${jsonGetSolution.time} Secs\nMemory used : ${jsonGetSolution.memory} bytes`;
-      a
+      
       // const newTestCaseResults = { ...this.state.testCaseResults };
       // newTestCaseResults[testCase] = "Passed";
       // this.setState({ testCaseResults: newTestCaseResults });
       // Compare the actual output with the expected output
-
-      const newTestCaseResults = { ...this.state.testCaseResults };
-      newTestCaseResults[testCase] = "Passed";
-      this.setState({ testCaseResults: newTestCaseResults });
 
       this.socket.emit('solutionData', {
         user: this.state.user.username,
         memory: jsonGetSolution.memory,
         time: jsonGetSolution.time,
         stdout: output,
-        testCase: testCase,
     });
 
     } else if (jsonGetSolution.stderr) {
@@ -257,7 +260,7 @@ export default class Compiler extends Component {
     if (this.state.isLoaded) {
       return <div>Loading...</div>;
     }
-
+    
     return (
       <>
         <div className="row container-fluid">
@@ -322,18 +325,15 @@ export default class Compiler extends Component {
           </span>
           <br />
           <textarea id="input" onChange={this.userInput}></textarea>
-
-          <div className="mt-2 ml-5">
-            <h3>Test Case Results:</h3>
-            <ul>
-              {testCases.map(testCase => (
-                <li key={testCase}>
-                  {testCase}: {this.state.testCaseResults[testCase] || "Not Passed"}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
+        <p>{this.state.question.text}</p>
+        <ul>
+          {this.state.question.testCases.map((testCase, index) => (
+            <li key={index}>
+              Input: {testCase.input}, Expected Output: {testCase.output}
+            </li>
+          ))}
+        </ul>
       </>
     );
   }

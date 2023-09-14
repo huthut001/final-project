@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
-const fetch = require('node-fetch');
+const questions = require('./question'); // Import the question structure
+const { log } = require("console");
 
 const io = require("socket.io")(http, {
   cors: {
@@ -19,7 +20,16 @@ let submittedUsers = 0; // Keep track of the number of users who have submitte
 
 
 io.on("connection", (socket) => {
+  // Generate a random question based on the category (easy, medium, hard)
+
+  const category = 'easy'; // You can change this dynamically
+  const randomQuestion = getRandomQuestion(questions[category]);
+  console.log(randomQuestion);
+
+  socket.emit('newQuestion', randomQuestion);
+  console.log(socket.emit('newQuestion', randomQuestion));
   console.log("A user connected");
+
 
   // Listen for the "username" event from the client
   socket.on("username", (username) => {
@@ -28,32 +38,30 @@ io.on("connection", (socket) => {
       console.log(socket.username);
 
       socket.on('solutionData', (data) => {
+        // Here you can access the received memory and time values
+        const memory = data.memory;
+        const time = data.time;
+        const user = data.user
+        const stdout = data.stdout
 
-      // Here you can access the received memory and time values
+        // Do whatever you want with the received data on the server side
 
-      const memory = data.memory;
-      const time = data.time;
-      const user = data.user
-      const stdout = data.stdout
+        console.log(`user name: ${user}` );
+        console.log(`Received memory: ${memory} bytes`);
+        console.log(`Received time: ${time} Swecs`);
+        console.log(`output: ${stdout}`);
+        console.log(`type data ${typeof stdout}`);
 
-      // Do whatever you want with the received data on the server side
+        if (!(user in userMemory) || memory < userMemory[user]) {
+          userMemory[user] = memory;
+          userOutputs[user] = stdout;
+        }
 
-      console.log(`user name: ${user}` );
-      console.log(`Received memory: ${memory} bytes`);
-      console.log(`Received time: ${time} Swecs`);
-      console.log(`output: ${stdout}`);
-      console.log(`type data ${typeof stdout}`);
+        submittedUsers++;
 
-      if (!(user in userMemory) || memory < userMemory[user]) {
-        userMemory[user] = memory;
-        userOutputs[user] = stdout;
-      }
-
-      submittedUsers++;
-
-      if (submittedUsers === io.engine.clientsCount) {
-        evaluateSubmissions();
-      }
+        if (submittedUsers === io.engine.clientsCount) {
+          evaluateSubmissions();
+        }
     });
 
     // Handle other socket events or messages from the client, if needed.
@@ -77,6 +85,12 @@ io.on("connection", (socket) => {
 //     console.log(`User with least memory: ${leastMemoryUser} (${leastMemoryValue} bytes) wins!`);
 //   }
 // }
+
+function getRandomQuestion(questionArray) {
+  const randomIndex = Math.floor(Math.random() * questionArray.length);
+  return questionArray[randomIndex];
+}
+
 
 function evaluateSubmissions() {
   // Define the expected outputs or patterns to check
