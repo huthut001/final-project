@@ -15,6 +15,7 @@ const io = require("socket.io")(http, {
 
 // const allowedUsers = ["huthut", "user2", "user3"]; // Replace these with the actual allowed usernames
 const userMemory = {};
+const connectedUsers = [];
 const userOutputs = {};
 let submittedUsers = 0; // Keep track of the number of users who have submitte
 
@@ -28,13 +29,14 @@ io.on("connection", (socket) => {
 
   socket.emit('newQuestion', randomQuestion);
   console.log(socket.emit('newQuestion', randomQuestion));
-  console.log("A user connected");
-
+  console.log("A user connected"); 
 
   // Listen for the "username" event from the client
   socket.on("username", (username) => {
     // If the username is allowed, add it to the socket's data
       socket.username = username;
+      connectedUsers.push(socket.username);
+      io.emit("connectedUsers", connectedUsers);
       console.log(socket.username);
 
       socket.on('solutionData', (data) => {
@@ -67,7 +69,17 @@ io.on("connection", (socket) => {
     // Handle other socket events or messages from the client, if needed.
 
     socket.on("disconnect", () => {
-      console.log("A user disconnected");
+      
+      console.log("A user disconnected:", socket.username);
+
+      // Remove the disconnected user from the list
+      const index = connectedUsers.indexOf(socket.username);
+      if (index !== -1) {
+        connectedUsers.splice(index, 1);
+      }
+  
+      // Emit the updated list of connected users to all clients
+      io.emit("connectedUsers", connectedUsers);
     });
   });
 })

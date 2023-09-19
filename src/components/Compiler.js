@@ -20,6 +20,7 @@ export default class Compiler extends Component {
       testCaseResults: {}, // Initialize test case results object,
       isLoaded: true,
       question: {},
+      connectedUsers: [],
     };
     this.navigate = this.navigate.bind(this);
     this.socket = io();
@@ -76,6 +77,13 @@ export default class Compiler extends Component {
       this.setState({question: newQuestion})
       console.log(newQuestion);
     })
+
+    this.socket.on("connectedUsers", (users) => {
+      console.log("Connected Users:", users);
+  
+      // Update the component's state with the list of connected users
+      this.setState({ connectedUsers: users });
+    });
   }
 
 
@@ -327,11 +335,17 @@ export default class Compiler extends Component {
           <textarea id="input" onChange={this.userInput}></textarea>
         </div>
         <p>{this.state.question.text}</p>
+        <p>{this.state.question.detail}</p>
         <ul>
           {this.state.question.testCases.map((testCase, index) => (
             <li key={index}>
               Input: {testCase.input}, Expected Output: {testCase.output}
             </li>
+          ))}
+        </ul>
+        <ul>
+          {this.state.connectedUsers.map((user, index) => (
+            <li key={index}>{user}</li>
           ))}
         </ul>
       </>

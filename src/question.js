@@ -8,9 +8,11 @@ const questions = {
           { input: 'input3', output: 'output3' }
           // Add more test cases as needed
         ],
+        detail: "print('hello, world')"
       },
       // Add more easy questions
     ],
+    
     medium: [
       {
         text: 'Question 1',
