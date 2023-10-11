@@ -13,10 +13,7 @@ const io = require("socket.io")(http, {
   }
 });
 
-const TIMER_DURATION = 1000 * 1000;
-let timer;
-let remainingTime = TIMER_DURATION;
-
+// const allowedUsers = ["huthut", "user2", "user3"]; // Replace these with the actual allowed usernames
 const userMemory = {};
 const connectedUsers = [];
 const userOutputs = {};
@@ -34,17 +31,6 @@ io.on("connection", (socket) => {
   console.log(socket.emit('newQuestion', randomQuestion));
   console.log("A user connected"); 
 
-  if(!timer){
-    timer = setInterval(() => {
-      remainingTime -= 1000
-      if (remainingTime <= 0){
-        clearInterval(timer)
-        io.emit("timerExpired")
-      } else{
-        io.emit("timeUpdate", remainingTime);
-      }
-    }, 1000);
-  }
   // Listen for the "username" event from the client
   socket.on("username", (username) => {
     // If the username is allowed, add it to the socket's data
@@ -94,16 +80,9 @@ io.on("connection", (socket) => {
   
       // Emit the updated list of connected users to all clients
       io.emit("connectedUsers", connectedUsers);
-
-      if(io.engine.clientsCount === 0) {
-        clearInterval(timer);
-        timer = null;
-        remainingTime=TIMER_DURATION;
-      }
     });
   });
 })
-
 // function announceWinner() {
 //   let leastMemoryUser = null;
 //   let leastMemoryValue = Infinity;

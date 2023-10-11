@@ -85,6 +85,96 @@ function Question() {
   };
 
   return (
+    // <div>
+    //   <Navbar></Navbar>
+    //     <div className="question-container">
+    //         <form onSubmit={handleSubmit}>
+    //             <div className="form-group">
+    //             <label>Title Name:</label>
+    //             <input
+    //                 type="text"
+    //                 name="title"
+    //                 value={inputs.title || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             {/* <div className="form-group">
+    //             <label>Answer:</label>
+    //             <input
+    //                 type="text"
+    //                 name="answer"
+    //                 value={inputs.answer || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div> */}
+
+    //             <div className="form-group">
+    //             <label>Mode:</label>
+    //             <input
+    //                 type="text"
+    //                 name="mode"
+    //                 value={inputs.mode || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Testcase:</label>
+    //             <input
+    //                 type="text"
+    //                 name="output"
+    //                 value={inputs.output || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Detail:</label>
+    //             <input
+    //                 type="text"
+    //                 name="detail"
+    //                 value={inputs.detail || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Runtime:</label>
+    //             <input
+    //                 type="text"
+    //                 name="runtime"
+    //                 value={inputs.runtime || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Memory:</label>
+    //             <input
+    //                 type="text"
+    //                 name="memory"
+    //                 value={inputs.memory || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <div className="form-group">
+    //             <label>Cpu Usage:</label>
+    //             <input
+    //                 type="text"
+    //                 name="cpu"
+    //                 value={inputs.cpu || ''}
+    //                 onChange={handleChange}
+    //             />
+    //             </div>
+
+    //             <button type="submit" className="submit-btn">
+    //             Submit
+    //             </button>
+    //         </form>
+    //     </div>
+
         <div>
           <Navbar></Navbar>
           <form className='container' style={{ padding:30 }}>

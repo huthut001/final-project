@@ -1,133 +1,33 @@
-/* Reset some default styles */
-body, h1, h2, h3, p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Basic styling for the page */
-  .leetcode-container {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
-    padding: 20px;
-  }
-  
-  .leetcode-header {
-    background-color: #333; /* Dark gray header */
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .leetcode-content {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .leetcode-sidebar {
-    flex: 1;
-    background-color: #ddd; /* Medium gray sidebar */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 20px;
-  }
-  
-  .leetcode-sidebar-item {
-    margin-bottom: 20px;
-  }
-  
-  .leetcode-icon {
-    margin-right: 5px;
-  }
-  
-  .leetcode-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .leetcode-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .leetcode-button {
-    background-color: #555; /* Dark gray button */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .leetcode-button:hover {
-    background-color: #333; /* Slightly darker gray on hover */
-  }
-  
-  .leetcode-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .leetcode-main {
-    flex: 2;
-    background-color: #eee; /* Light gray main content area */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .leetcode-alert {
-    background-color: #f8d7da; /* Red alert background */
-    color: #721c24;
-    padding: 10px;
-    font-weight: bold;
-  }
-  
-  .leetcode-user-input {
-    background-color: #ddd; /* Medium gray user input area */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  .leetcode-heading {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .leetcode-question {
-    background-color: #eee; /* Light gray question area */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  .leetcode-test-cases,
-  .leetcode-test-results,
-  .leetcode-connected-users {
-    background-color: #eee; /* Light gray areas for test cases, results, and users */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  .leetcode-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .leetcode-list-item {
-    margin-bottom: 10px;
-  }
-  
+.language {
+    display: inline;
+}
+.heading {
+    font-size: 20px;
+}
+#source {
+    width: 100% !important;
+    background: #cccccc52;
+    height: 50vh;
+    font-size: 15px;
+    resize: vertical;
+}
+#input {
+    background: #cccccc52;
+    width: 45.6%;
+    height: 17vh;
+    resize: vertical;
+    font-size: 17px;
+}
+#output {
+    background: #cccccc52;
+    width: 50%;
+    height: 100%;
+    position: fixed;
+    top: 7.6%;
+    font-size: 18px;
+    right: 0;
+    resize: none;
+}
+.language {
+    width: 150px;
+}
